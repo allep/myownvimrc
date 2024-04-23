@@ -56,7 +56,7 @@ nnoremap <silent> <C-k> :Rg <C-R><C-W><CR>
 nnoremap <silent> <f2> :Rg<CR>
 
 " Ctags
-nnoremap <silent> <f4> :!ctags -R --exclude **/Intermediate/*<CR>
+nnoremap <silent> <f3> :!ctags -R --exclude **/Intermediate/*<CR>
 
 " Build
 nnoremap <silent> <f6> :terminal make<CR>
