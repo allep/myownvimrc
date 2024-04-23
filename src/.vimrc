@@ -13,9 +13,6 @@ set incsearch
 set scrolloff=10
 set autoread
 
-colorscheme gruvbox
-set bg=dark
-
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
@@ -41,6 +38,10 @@ Plugin 'puremourning/vimspector'
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
+
+" Colorscheme
+colorscheme gruvbox
+set bg=dark
 
 " Vimspector
 let g:vimspector_enable_mappings = 'HUMAN'
