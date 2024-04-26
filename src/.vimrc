@@ -12,6 +12,7 @@ set smartcase
 set incsearch
 set scrolloff=10
 set autoread
+set noswapfile
 
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
@@ -79,6 +80,7 @@ nmap <Leader>dj <Plug>VimspectorStepOver
 " Misc
 nnoremap <silent> <Leader><Leader> gt<CR>
 nnoremap <silent> <Leader>h :set hlsearch!<CR>
+nnoremap <silent> ff gggqG<CR>
 
 " Clang format (on save)
 function! FormatOnSave()
