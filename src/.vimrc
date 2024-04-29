@@ -60,8 +60,8 @@ nnoremap <silent> <f2> :Rg<CR>
 nnoremap <silent> <Leader><f4> :!ctags -R<CR>
 
 " Build
-nnoremap <silent> <f6> :terminal make<CR>
-nnoremap <silent> <f7> :terminal make all<CR>
+nnoremap <silent> <Leader><f5> :terminal make<CR>
+nnoremap <silent> <Leader><f6> :terminal make all<CR>
 
 " Vimspector - non human mappings
 " From here: https://dev.to/iggredible/debugging-in-vim-with-vimspector-4n0m
