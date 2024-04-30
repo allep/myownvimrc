@@ -80,7 +80,7 @@ nmap <Leader>dj <Plug>VimspectorStepOver
 " Misc
 nnoremap <silent> <Leader><Leader> gt<CR>
 nnoremap <silent> <Leader>h :set hlsearch!<CR>
-nnoremap <silent> ff gggqG<CR>
+nnoremap <silent> <Leader>ff gggqG<CR>
 
 " Clang format (on save)
 function! FormatOnSave()
