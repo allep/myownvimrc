@@ -35,13 +35,14 @@ Plugin 'prabirshrestha/async.vim'
 Plugin 'prabirshrestha/vim-lsp'
 Plugin 'prabirshrestha/asyncomplete.vim'
 Plugin 'puremourning/vimspector'
+Plugin 'drichardson/vim-unreal'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
 
 " Colorscheme
-colorscheme gruvbox
+colorscheme onedark
 set bg=dark
 
 " Vimspector
@@ -57,11 +58,16 @@ nnoremap <silent> <C-k> :Rg <C-R><C-W><CR>
 nnoremap <silent> <f2> :Rg<CR>
 
 " Ctags
-nnoremap <silent> <Leader><f4> :!ctags -R<CR>
+nnoremap <silent> <Leader><f4> :Ue4Tags<CR>
 
 " Build
-nnoremap <silent> <Leader><f5> :terminal make<CR>
-nnoremap <silent> <Leader><f6> :terminal make all<CR>
+function! CompileAndRun() 
+    silent call ue4#make('build DebugGame')
+    silent call ue4#make('run DebugGame')
+endfunction
+
+nnoremap <silent> <Leader><f6> :Ue4Make build DebugGame<CR>
+nnoremap <silent> <Leader><f7> :call CompileAndRun()<CR>
 
 " Vimspector - non human mappings
 " From here: https://dev.to/iggredible/debugging-in-vim-with-vimspector-4n0m
@@ -78,7 +84,8 @@ nmap <Leader>dl <Plug>VimspectorStepInto
 nmap <Leader>dj <Plug>VimspectorStepOver
 
 " Misc
-nnoremap <silent> <Leader><Leader> gt<CR>
+nnoremap <silent> <Leader>[ gt<CR>
+nnoremap <silent> <Leader>] gT<CR>
 nnoremap <silent> <Leader>h :set hlsearch!<CR>
 nnoremap <silent> <Leader>ff gggqG<CR>
 
