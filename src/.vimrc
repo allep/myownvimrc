@@ -44,7 +44,7 @@ call vundle#end()            " required
 filetype plugin indent on    " required
 
 " Git
-nnoremap <Leader><f1> :Git blame<CR>
+nnoremap <Leader><f2> :Git blame<CR>
 
 " Colorscheme
 colorscheme onedark
@@ -67,11 +67,11 @@ nnoremap <silent> <Leader><f4> :Ue4Tags<CR>
 
 " Build
 function! CompileAndRun() 
-    silent call ue4#make('build DebugGame')
-    silent call ue4#make('run DebugGame')
+    silent call ue4#build()
+    silent call ue4#make('run')
 endfunction
 
-nnoremap <silent> <Leader><f6> :Ue4Make build DebugGame<CR>
+nnoremap <silent> <Leader><f6> :Ue4Make build<CR>
 nnoremap <silent> <Leader><f7> :call CompileAndRun()<CR>
 
 " Vimspector - non human mappings
@@ -93,12 +93,15 @@ nnoremap <silent> <Leader>[ gt<CR>
 nnoremap <silent> <Leader>] gT<CR>
 nnoremap <silent> <Leader>h :set hlsearch!<CR>
 nnoremap <silent> <Leader>ff gggqG<CR>
+nnoremap <silent> <Leader>vt :vert terminal<CR>
 
 " Quickfix list navigation
+nnoremap <silent> <Leader><Leader> :cnext<CR>
 nnoremap <silent> cn :cnext<CR>
 nnoremap <silent> cp :cprev<CR>
 
 " Split windows
+nnoremap <Leader><f3> :close<CR>
 nnoremap <c-j> <c-w><c-j>
 nnoremap <c-k> <c-w><c-k>
 nnoremap <c-l> <c-w><c-l>
