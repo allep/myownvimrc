@@ -47,7 +47,7 @@ filetype plugin indent on    " required
 nnoremap <Leader><f2> :Git blame<CR>
 
 " Colorscheme
-colorscheme onedark
+colorscheme gruvbox
 set bg=dark
 
 " Vimspector
