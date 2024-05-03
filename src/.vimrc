@@ -13,6 +13,8 @@ set incsearch
 set scrolloff=10
 set autoread
 set noswapfile
+set splitbelow
+set splitright
 
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
@@ -53,9 +55,9 @@ let g:vimspector_base_dir='/home/alle/.vim/bundle/vimspector'
 let g:ackprg = 'ag --vimgrep'
 
 " FZF
-nnoremap <silent> <C-p> :GFiles<CR>
-nnoremap <silent> <C-k> :Rg <C-R><C-W><CR>
-nnoremap <silent> <f2> :Rg<CR>
+nnoremap <silent> <Leader>p :GFiles<CR>
+nnoremap <silent> <Leader>o :Rg <C-R><C-W><CR>
+nnoremap <silent> <Leader>i :Rg<CR>
 
 " Ctags
 nnoremap <silent> <Leader><f4> :Ue4Tags<CR>
@@ -88,6 +90,16 @@ nnoremap <silent> <Leader>[ gt<CR>
 nnoremap <silent> <Leader>] gT<CR>
 nnoremap <silent> <Leader>h :set hlsearch!<CR>
 nnoremap <silent> <Leader>ff gggqG<CR>
+
+" Quickfix list navigation
+nnoremap <silent> cn :cnext<CR>
+nnoremap <silent> cp :cprev<CR>
+
+" Split windows
+nnoremap <c-j> <c-w><c-j>
+nnoremap <c-k> <c-w><c-k>
+nnoremap <c-l> <c-w><c-l>
+nnoremap <c-h> <c-w><c-h>
 
 " Clang format (on save)
 function! FormatOnSave()
