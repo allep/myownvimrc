@@ -43,6 +43,9 @@ Plugin 'drichardson/vim-unreal'
 call vundle#end()            " required
 filetype plugin indent on    " required
 
+" Git
+nnoremap <Leader><f1> :Git blame<CR>
+
 " Colorscheme
 colorscheme onedark
 set bg=dark
