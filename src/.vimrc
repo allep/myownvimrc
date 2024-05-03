@@ -68,11 +68,17 @@ nnoremap <silent> <Leader><f4> :Ue4Tags<CR>
 " Build
 function! CompileAndRun() 
     silent call ue4#build()
-    silent call ue4#make('run')
+    call ue4#make('run')
 endfunction
 
-nnoremap <silent> <Leader><f6> :Ue4Make build<CR>
-nnoremap <silent> <Leader><f7> :call CompileAndRun()<CR>
+function! CompileAndTest() 
+    silent call ue4#build()
+    call system('bim-cli-test.sh')
+endfunction
+
+nnoremap <Leader><f6> :Ue4Make build<CR>
+nnoremap <Leader><f7> :call CompileAndRun()<CR>
+nnoremap <Leader><f10> :call CompileAndTest()<CR>
 
 " Vimspector - non human mappings
 " From here: https://dev.to/iggredible/debugging-in-vim-with-vimspector-4n0m
