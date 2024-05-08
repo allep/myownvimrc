@@ -58,7 +58,7 @@ let g:vimspector_base_dir='/home/alle/.vim/bundle/vimspector'
 let g:ackprg = 'ag --vimgrep'
 
 " FZF
-nnoremap <silent> <Leader>p :GFiles<CR>
+nnoremap <silent> <Leader>p :Files<CR>
 nnoremap <silent> <Leader>o :Rg <C-R><C-W><CR>
 nnoremap <silent> <Leader>i :Rg<CR>
 
