@@ -15,6 +15,7 @@ set autoread
 set noswapfile
 set splitbelow
 set splitright
+set hidden
 
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
