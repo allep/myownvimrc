@@ -16,6 +16,7 @@ set noswapfile
 set splitbelow
 set splitright
 set hidden
+set spell
 
 set grepprg=rg\ -S\ --line-number\ --column\ $*
 set grepformat=%f:%l:%c%m
@@ -51,7 +52,7 @@ filetype plugin indent on    " required
 nnoremap <Leader><f2> :Git blame<CR>
 
 " Colorscheme
-colorscheme gruvbox
+colorscheme desert
 set bg=dark
 
 " Vimspector
