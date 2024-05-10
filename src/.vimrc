@@ -36,7 +36,6 @@ Plugin 'junegunn/fzf'
 Plugin 'junegunn/fzf.vim'
 Plugin 'mileszs/ack.vim'
 Plugin 'tpope/vim-fugitive'
-Plugin 'shumphrey/fugitive-gitlab.vim'
 Plugin 'morhetz/gruvbox'
 Plugin 'joshdick/onedark.vim'
 Plugin 'prabirshrestha/async.vim'
@@ -51,9 +50,6 @@ filetype plugin indent on    " required
 
 " Git
 nnoremap <Leader><f2> :Git blame<CR>
-
-" Gitlab token
-let g:gitlab_api_keys = {'gitlab.com': 'glpat--4i-fcyHyf9-ZM_EpAYf'}
 
 " Colorscheme
 colorscheme desert
