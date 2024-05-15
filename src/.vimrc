@@ -114,6 +114,7 @@ nnoremap <c-h> <c-w><c-h>
 let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<c-b>"
 let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+let g:UltiSnipsSnippetDirectories=$HOME.'/.vim/UltiSnips'
 
 " Clang format (on save)
 function! FormatOnSave()
