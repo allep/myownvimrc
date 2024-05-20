@@ -75,7 +75,7 @@ nnoremap <silent> <Leader><f4> :Ue4Tags<CR>
 nnoremap <Leader><f6> :make -f Makefile-AP compile<CR>
 nnoremap <Leader><f7> :make -f Makefile-AP test<CR>
 nnoremap <Leader><f8> :make -f Makefile-AP all<CR>
-nnoremap <c-b><c-b> :make -f Makefile-AP run<cr>
+nnoremap <c-x><c-x> :make -f Makefile-AP run<cr>
 
 " Vimspector - non human mappings
 " From here: https://dev.to/iggredible/debugging-in-vim-with-vimspector-4n0m
