@@ -67,6 +67,7 @@ let g:ackprg = 'ag --vimgrep'
 nnoremap <silent> <Leader>p :Files<CR>
 nnoremap <silent> <Leader>o :Rg <C-R><C-W><CR>
 nnoremap <silent> <Leader>i :Rg<CR>
+let g:fzf_layout = { 'down': '40%' }
 
 " Ctags
 nnoremap <silent> <Leader><f4> :Ue4Tags<CR>
