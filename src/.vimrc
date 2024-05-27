@@ -70,7 +70,7 @@ nnoremap <silent> <Leader>i :Rg<CR>
 let g:fzf_layout = { 'down': '40%' }
 
 " Ctags
-nnoremap <silent> <Leader><f4> :Ue4Tags<CR>
+nnoremap <silent> <Leader><f4> :!ctags -R<CR>
 
 " Build
 nnoremap <Leader><f6> :make -f Makefile-AP compile<CR>
