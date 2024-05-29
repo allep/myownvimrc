@@ -93,6 +93,7 @@ nmap <Leader>dl <Plug>VimspectorStepInto
 nmap <Leader>dj <Plug>VimspectorStepOver
 
 " Misc
+nnoremap <c-x><c-e> :tabe<CR>
 nnoremap <silent> <Leader>[ gt<CR>
 nnoremap <silent> <Leader>] gT<CR>
 nnoremap <silent> <Leader>h :set hlsearch!<CR>
