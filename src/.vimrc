@@ -69,6 +69,12 @@ nnoremap <silent> <Leader>o :Rg <C-R><C-W><CR>
 nnoremap <silent> <Leader>i :Rg<CR>
 let g:fzf_layout = { 'down': '40%' }
 
+" FZF with top preview
+command! -bang -nargs=* Rg
+  \ call fzf#vim#grep(
+  \   "rg --column --line-number --no-heading --color=always --smart-case -- ".shellescape(<q-args>), 1, 
+  \   fzf#vim#with_preview('up', 'ctrl-/'), 1)
+
 " Ctags
 nnoremap <silent> <Leader><f4> :!ctags -R<CR>
 
