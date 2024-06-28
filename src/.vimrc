@@ -106,6 +106,9 @@ nnoremap <silent> <Leader>h :set hlsearch!<CR>
 nnoremap <silent> <Leader>ff gggqG<CR>
 nnoremap <silent> <Leader>vt :vert terminal<CR>
 
+" Break ini coma-separated lists into multiple lines
+nnoremap <silent> <Leader>cc :%s/,/\r/g<CR>
+
 " Quickfix list navigation
 nnoremap <silent> <Leader><Leader> :cnext<CR>
 nnoremap <silent> cn :cnext<CR>
