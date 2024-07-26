@@ -67,6 +67,10 @@ let g:ackprg = 'ag --vimgrep'
 nnoremap <silent> <Leader>p :Files<CR>
 nnoremap <silent> <Leader>o :Rg <C-R><C-W><CR>
 nnoremap <silent> <Leader>i :Rg<CR>
+nnoremap <silent> <C-V>p :Files<CR>
+nnoremap <silent> <C-V>o :Rg <C-R><C-W><CR>
+nnoremap <silent> <C-V>i :Rg<CR>
+
 let g:fzf_layout = { 'down': '40%' }
 
 " FZF with top preview
@@ -102,6 +106,8 @@ nmap <Leader>dj <Plug>VimspectorStepOver
 nnoremap <c-x><c-e> :tabe<CR>
 nnoremap <silent> <Leader>[ gt<CR>
 nnoremap <silent> <Leader>] gT<CR>
+nnoremap <silent> <C-V>n gt<CR>
+nnoremap <silent> <C-V>p gT<CR>
 nnoremap <silent> <Leader>h :set hlsearch!<CR>
 nnoremap <silent> <Leader>ff gggqG<CR>
 nnoremap <silent> <Leader>vt :vert terminal<CR>
