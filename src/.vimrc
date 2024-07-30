@@ -44,6 +44,7 @@ Plugin 'puremourning/vimspector'
 Plugin 'drichardson/vim-unreal'
 Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
+Plugin 'madox2/vim-ai'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -103,7 +104,7 @@ nmap <Leader>dl <Plug>VimspectorStepInto
 nmap <Leader>dj <Plug>VimspectorStepOver
 
 " Misc
-nnoremap <c-x><c-e> :tabe<CR>
+nnoremap <C-x>e :tabe<CR>
 nnoremap <silent> <Leader>[ gt<CR>
 nnoremap <silent> <Leader>] gT<CR>
 nnoremap <silent> <C-x>n gt<CR>
