@@ -81,7 +81,8 @@ command! -bang -nargs=* Rg
   \   fzf#vim#with_preview('up', 'ctrl-/'), 1)
 
 " Ctags
-nnoremap <silent> <Leader><f4> :!ctags -R<CR>
+set tags+=/home/alle/workspace/UnrealEngine54/tags
+nnoremap <silent> <Leader><f4> :!genctags.sh<CR>
 
 " Build
 nnoremap <Leader><f6> :make -f Makefile-AP compile<CR>
