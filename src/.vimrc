@@ -110,7 +110,7 @@ nnoremap <silent> <Leader>[ gt<CR>
 nnoremap <silent> <Leader>] gT<CR>
 nnoremap <silent> <C-x>n gt<CR>
 nnoremap <silent> <C-x>p gT<CR>
-nnoremap <silent> <Leader>h :set hlsearch!<CR>
+nnoremap <silent> <C-x>h :set hlsearch!<CR>
 nnoremap <silent> <Leader>ff gggqG<CR>
 nnoremap <silent> <Leader>vt :vert terminal<CR>
 
