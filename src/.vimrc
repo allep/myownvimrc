@@ -45,10 +45,21 @@ Plugin 'drichardson/vim-unreal'
 Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
 Plugin 'madox2/vim-ai'
+Plugin 'Exafunction/codeium.vim'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
+
+" Codeium
+let g:codeium_disable_bindings = 1
+
+imap <script><silent><nowait><expr> <C-j> codeium#Accept()
+imap <script><silent><nowait><expr> <C-k> codeium#AcceptNextWord()
+imap <script><silent><nowait><expr> <C-l> codeium#AcceptNextLine()
+imap <C-s>n <Cmd>call codeium#CycleCompletions(1)<CR>
+imap <C-s>N <Cmd>call codeium#CycleCompletions(-1)<CR>
+imap <C-s>c <Cmd>call codeium#Clear()<CR>
 
 " Git
 nnoremap <Leader><f2> :Git blame<CR>
