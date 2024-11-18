@@ -67,6 +67,7 @@ nnoremap <Leader><f2> :Git blame<CR>
 " Colorscheme
 colorscheme desert
 set bg=dark
+syntax on
 
 " Vimspector
 let g:vimspector_enable_mappings = 'HUMAN'
