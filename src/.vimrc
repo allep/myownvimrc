@@ -93,7 +93,7 @@ command! -bang -nargs=* Rg
   \   fzf#vim#with_preview('up', 'ctrl-/'), 1)
 
 " Ctags
-set tags+=/home/alle/workspace/UnrealEngine54/tags
+set tags+=/home/alle/workspace/UnrealEngine/tags
 nnoremap <silent> <Leader><f4> :!genctags.sh<CR>
 
 " Build
