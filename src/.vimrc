@@ -59,7 +59,10 @@ imap <script><silent><nowait><expr> <C-k> codeium#AcceptNextWord()
 imap <script><silent><nowait><expr> <C-l> codeium#AcceptNextLine()
 imap <C-s>n <Cmd>call codeium#CycleCompletions(1)<CR>
 imap <C-s>N <Cmd>call codeium#CycleCompletions(-1)<CR>
-imap <C-s>c <Cmd>call codeium#Clear()<CR>
+
+let g:codeium_filetypes = {
+    \ "rust": v:false,
+    \ }
 
 " Git
 nnoremap <Leader><f2> :Git blame<CR>
@@ -148,8 +151,17 @@ let g:UltiSnipsJumpForwardTrigger="<c-b>"
 let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 let g:UltiSnipsSnippetDirectories=$HOME.'/.vim/UltiSnips'
 
-" Clang format (on save)
-function! FormatOnSave()
+" Rust
+let g:rustfmt_autosave = 1
+
+" COC
+inoremap <expr> <cr> coc#pum#visible() ? coc#pum#confirm() : "\<CR>"
+inoremap <silent> <c-space> coc#refresh()
+inoremap <expr> <Tab> coc#pum#visible() ? coc#pum#next(1) : "\<Tab>"
+inoremap <expr> <S-Tab> coc#pum#visible() ? coc#pum#prev(1) : "\<S-Tab>"
+
+" Clang format (on save) for C/CPP files
+function! FormatCppOnSave()
     let l:formatdiff = 1
     if has('python')
         pyf /usr/share/clang/clang-format.py
@@ -158,5 +170,5 @@ function! FormatOnSave()
     endif
 endfunction
 
-autocmd BufWritePre *.h,*.cc,*.cpp,*.hpp call FormatOnSave()
+autocmd BufWritePre *.h,*.cc,*.cpp,*.hpp call FormatCppOnSave()
 
