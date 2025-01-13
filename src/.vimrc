@@ -51,6 +51,13 @@ Plugin 'Exafunction/codeium.vim'
 call vundle#end()            " required
 filetype plugin indent on    " required
 
+" Plug
+call plug#begin()
+
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+
+call plug#end()
+
 " Codeium
 let g:codeium_disable_bindings = 1
 
@@ -94,9 +101,10 @@ command! -bang -nargs=* Rg
   \ call fzf#vim#grep(
   \   "rg --column --line-number --no-heading --color=always --smart-case -- ".shellescape(<q-args>), 1, 
   \   fzf#vim#with_preview('up', 'ctrl-/'), 1)
+let $FZF_DEFAULT_COMMAND = 'fd --type f --exclude .git --ignore-file ~/.gitignore'
 
 " Ctags
-set tags+=/home/alle/workspace/UnrealEngine/tags
+set tags+=/media/workspace/workspace/UnrealEngine/tags
 nnoremap <silent> <Leader><f4> :!genctags.sh<CR>
 
 " Build
