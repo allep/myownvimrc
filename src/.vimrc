@@ -17,8 +17,8 @@ set splitbelow
 set splitright
 set hidden
 
-set grepprg=rg\ -S\ --line-number\ --column\ $*
-set grepformat=%f:%l:%c%m
+set grepprg=rg\ -S\ --line-number\ --column\ --vimgrep\ -uu\ $*
+set grepformat=%f:%l:%c:%m
 
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
