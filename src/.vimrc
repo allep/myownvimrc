@@ -55,6 +55,7 @@ filetype plugin indent on    " required
 call plug#begin()
 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'junkblocker/git-time-lapse', {'branch': 'master'}
 
 call plug#end()
 
@@ -131,6 +132,7 @@ nmap <Leader>dj <Plug>VimspectorStepOver
 
 " Misc
 nnoremap <C-x>e :tabe<CR>
+nnoremap <C-x>c :tabclose<CR>
 nnoremap <silent> <Leader>[ gt<CR>
 nnoremap <silent> <Leader>] gT<CR>
 nnoremap <silent> <C-x>n gt<CR>
@@ -181,3 +183,4 @@ endfunction
 
 autocmd BufWritePre *.h,*.cc,*.cpp,*.hpp call FormatCppOnSave()
 
+set path=.,,**
