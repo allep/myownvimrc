@@ -74,6 +74,7 @@ let g:codeium_filetypes = {
 
 " Git
 nnoremap <Leader><f2> :Git blame<CR>
+nnoremap <c-x>d :silent Git difftool<CR>
 
 " Colorscheme
 colorscheme desert
