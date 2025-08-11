@@ -16,6 +16,7 @@ set noswapfile
 set splitbelow
 set splitright
 set hidden
+set hlsearch
 
 set grepprg=rg\ -S\ --line-number\ --column\ --vimgrep\ -uu\ $*
 set grepformat=%f:%l:%c:%m
