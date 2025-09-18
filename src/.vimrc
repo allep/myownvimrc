@@ -131,6 +131,7 @@ nnoremap <silent> <C-x>h :set hlsearch!<CR>
 nnoremap <silent> <Leader>ff gggqG<CR>
 nnoremap <silent> <Leader>vt :vert terminal<CR>
 nnoremap <silent> <C-x><space> :Exp<CR>
+nnoremap <silent> <C-x>j :vim /\C<C-R><C-W>/ %:h/**/*.cpp %:h/**/*.h<CR> 
 
 " Break ini coma-separated lists into multiple lines
 nnoremap <silent> <Leader>cc :%s/,/\r/g<CR>
