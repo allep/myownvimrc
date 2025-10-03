@@ -17,6 +17,7 @@ set splitbelow
 set splitright
 set hidden
 set hlsearch
+set wildignore+=.git,*.o,*.so,Intermediate/**,Plugins/**,Binaries/**,Build/**
 
 set grepprg=rg\ -S\ --line-number\ --column\ --vimgrep\ -uu\ $*
 set grepformat=%f:%l:%c:%m
@@ -131,7 +132,7 @@ nnoremap <silent> <C-x>h :set hlsearch!<CR>
 nnoremap <silent> <Leader>ff gggqG<CR>
 nnoremap <silent> <Leader>vt :vert terminal<CR>
 nnoremap <silent> <C-x><space> :Exp<CR>
-nnoremap <silent> <C-x>j :vim /\C<C-R><C-W>/ %:h/**/*.cpp %:h/**/*.h<CR> 
+nnoremap <silent> <C-x>j :vim /\C<C-R><C-W>/ **/*.cpp **/*.h<CR> 
 
 " Break ini coma-separated lists into multiple lines
 nnoremap <silent> <Leader>cc :%s/,/\r/g<CR>
