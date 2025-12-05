@@ -177,6 +177,59 @@ function! FormatCppOnSave()
     endif
 endfunction
 
+" Switch source to header
+function! FindProjectRoot()
+  let l:markers = ['.git', '.svn', 'Makefile', 'CMakeLists.txt', '.project']
+  let l:current_dir = expand('%:p:h')
+  
+  while l:current_dir != '/'
+    for marker in l:markers
+      if isdirectory(l:current_dir . '/' . marker) || filereadable(l:current_dir . '/' . marker)
+        return l:current_dir
+      endif
+    endfor
+    let l:current_dir = fnamemodify(l:current_dir, ':h')
+  endwhile
+  
+  return expand('%:p:h')
+endfunction
+
+function! SwitchSourceHeader()
+  let l:ext = expand("%:e")
+  let l:base = expand("%:t:r")
+  let l:project_root = FindProjectRoot()
+  
+  if l:ext != "cpp" && l:ext != "h"
+    echo "Current file is not a .cpp nor a .h file"
+    return
+  endif
+  
+  let l:target_ext = (l:ext == "cpp") ? ".h" : ".cpp"
+  
+  let l:find_cmd = 'find ' . shellescape(l:project_root) . 
+        \ ' -type f -name ' . shellescape(l:base . l:target_ext) . 
+        \ ' 2>/dev/null'
+  
+  let l:results = systemlist(l:find_cmd)
+  
+  if len(l:results) == 0
+    echo "File " . l:base . l:target_ext . " not found inside project root " . l:project_root
+  elseif len(l:results) == 1
+    execute "edit " . l:results[0]
+  else
+    echo "Multiple file found:"
+    for i in range(len(l:results))
+      echo (i+1) . ": " . l:results[i]
+    endfor
+    let l:choice = input("Choose (1-" . len(l:results) . "): ")
+    if l:choice > 0 && l:choice <= len(l:results)
+      execute "edit " . l:results[l:choice - 1]
+    endif
+  endif
+endfunction
+
+nnoremap <C-x>s :call SwitchSourceHeader()<CR>
+
 autocmd BufWritePre *.h,*.cc,*.cpp,*.hpp call FormatCppOnSave()
 
 set path=.,,**
