@@ -55,7 +55,7 @@ filetype plugin indent on    " required
 " Plug
 call plug#begin()
 
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
+" Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'junkblocker/git-time-lapse', {'branch': 'master'}
 Plug 'github/copilot.vim'
 
@@ -167,15 +167,19 @@ inoremap <silent> <c-space> coc#refresh()
 inoremap <expr> <Tab> coc#pum#visible() ? coc#pum#next(1) : "\<Tab>"
 inoremap <expr> <S-Tab> coc#pum#visible() ? coc#pum#prev(1) : "\<S-Tab>"
 
-" Clang format (on save) for C/CPP files
-function! FormatCppOnSave()
-    let l:formatdiff = 1
-    if has('python')
-        pyf /usr/share/clang/clang-format.py
-    elseif has('python3')
-        py3f /usr/share/clang/clang-format.py
-    endif
+" Clang format on save
+function! ClangFormatOnSave()
+    " Salva la posizione corrente del cursore
+    let l:cursor_pos = getpos('.')
+
+    " Esegui clang-format sull'intero buffer
+    execute '%!clang-format'
+
+    " Ripristina la posizione del cursore
+    call setpos('.', l:cursor_pos)
 endfunction
+
+autocmd BufWritePre *.h,*.cc,*.cpp,*.hpp call ClangFormatOnSave()
 
 " Switch source to header
 function! FindProjectRoot()
@@ -229,7 +233,5 @@ function! SwitchSourceHeader()
 endfunction
 
 nnoremap <C-x>s :call SwitchSourceHeader()<CR>
-
-autocmd BufWritePre *.h,*.cc,*.cpp,*.hpp call FormatCppOnSave()
 
 set path=.,,**
