@@ -67,7 +67,7 @@ let g:copilot_no_tab_map = v:true
 
 " Git
 nnoremap <Leader><f2> :Git blame<CR>
-nnoremap <c-x>d :silent Git difftool<CR>
+nnoremap <c-x>d :tab Git diff develop<CR>
 
 " Colorscheme
 colorscheme desert
@@ -103,12 +103,55 @@ set tags+=/media/workspace/workspace/UnrealEngine/tags
 nnoremap <silent> <Leader><f4> :!genctags.sh<CR>
 
 " Build
-nnoremap <Leader><f6> :make -f Makefile-AP compile<CR>
-nnoremap <Leader><f7> :make -f Makefile-AP test<CR>
-nnoremap <Leader><f8> :make -f Makefile-AP all<CR>
-nnoremap <c-x><c-x> :make -f Makefile-AP run<cr>
-nnoremap <c-x>m :make build<cr>
-nnoremap <c-x>r :make run<cr>
+
+let s:make_output = []
+
+function! AsyncMake(...) abort
+    let s:make_output = []
+    let l:cmd = ['make'] + a:000
+
+    call job_start(l:cmd, {
+                \ 'out_cb': 'MakeCollect',
+                \ 'err_cb': 'MakeCollect',
+                \ 'exit_cb': 'MakeFinished'
+                \ })
+
+    echo "Building..."
+endfunction
+
+
+function! MakeCollect(job_id, data) abort
+    if !empty(a:data)
+        call add(s:make_output, a:data)
+    endif
+endfunction
+
+
+function! MakeFinished(job_id, status) abort
+    call setqflist([], ' ', {
+                \ 'lines': s:make_output,
+                \ 'efm': &errorformat
+                \ })
+
+    if a:status == 0
+        echohl Question
+        echom "Build succeeded"
+    else
+        echohl ErrorMsg
+        echom "Build failed"
+        tab copen
+    endif
+    echohl None
+endfunction
+
+command! -nargs=* MakeAsync call AsyncMake(<f-args>)
+
+nnoremap <Leader><f6> :MakeAsync -f Makefile-AP full-compile<CR>
+nnoremap <Leader><f7> :MakeAsync -f Makefile-AP test<CR>
+nnoremap <Leader><f8> :MakeAsync -f Makefile-AP all<CR>
+nnoremap <c-x><c-x> :MakeAsync -f Makefile-AP run<cr>
+nnoremap <c-x>m :MakeAsync build<cr>
+nnoremap <c-x>r :MakeAsync run<cr>
 
 " Vimspector - non human mappings
 " From here: https://dev.to/iggredible/debugging-in-vim-with-vimspector-4n0m
@@ -233,3 +276,4 @@ nnoremap <C-x>s :call SwitchSourceHeader()<CR>
 autocmd BufWritePre *.h,*.cc,*.cpp,*.hpp call FormatCppOnSave()
 
 set path=.,,**
+
