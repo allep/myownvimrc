@@ -50,4 +50,5 @@ map("n", "<C-x><space>", ":Exp<CR>", { desc = "Open netrw" })
 local telescope_builtin = require('telescope.builtin')
 map("n", "<C-x>o", telescope_builtin.grep_string, { desc = "Telescope grep string" })
 map("n", "<C-x>i", telescope_builtin.live_grep, { desc = "Telescope live grep" })
+map("n", "<C-x>f", telescope_builtin.find_files, { desc = "Telescope find files" })
 
