@@ -1,3 +1,5 @@
+require("config.lazy")
+
 local opt = vim.opt
 
 -- Line numbers
@@ -36,8 +38,16 @@ opt.splitbelow = true
 -- Mappings
 local map = vim.keymap.set
 
-map("n", "<C-h>", "<C-w>h", { desc = "Finestra sinistra" })
-map("n", "<C-j>", "<C-w>j", { desc = "Finestra sotto" })
-map("n", "<C-k>", "<C-w>k", { desc = "Finestra sopra" })
-map("n", "<C-l>", "<C-w>l", { desc = "Finestra destra" })
+map("n", "<C-h>", "<C-w>h", { desc = "Sx window" })
+map("n", "<C-j>", "<C-w>j", { desc = "Below window" })
+map("n", "<C-k>", "<C-w>k", { desc = "Above window" })
+map("n", "<C-l>", "<C-w>l", { desc = "Dx window" })
+map("n", "<C-x>e", ":tabe<CR>", { desc = "New tab" })
+map("n", "<C-x>n", "gt<CR>", { desc = "Next tab" })
+map("n", "<C-x>p", "gT<CR>", { desc = "Prev tab" })
+map("n", "<C-x><space>", ":Exp<CR>", { desc = "Open netrw" })
+
+local telescope_builtin = require('telescope.builtin')
+map("n", "<C-x>o", telescope_builtin.grep_string, { desc = "Telescope grep string" })
+map("n", "<C-x>i", telescope_builtin.live_grep, { desc = "Telescope live grep" })
 
