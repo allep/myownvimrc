@@ -35,6 +35,8 @@ opt.updatetime = 250
 opt.splitright = true
 opt.splitbelow = true
 
+opt.wildignore:append(".git,*.o,*.so,Intermediate/**,Plugins/**,Binaries/**,Build/**")
+
 -- Mappings
 local map = vim.keymap.set
 
@@ -45,10 +47,39 @@ map("n", "<C-l>", "<C-w>l", { desc = "Dx window" })
 map("n", "<C-x>e", ":tabe<CR>", { desc = "New tab" })
 map("n", "<C-x>n", "gt<CR>", { desc = "Next tab" })
 map("n", "<C-x>p", "gT<CR>", { desc = "Prev tab" })
+
+-- netrw
 map("n", "<C-x><space>", ":Exp<CR>", { desc = "Open netrw" })
+
+-- quickfix
+map("n", "cn", ":cnext<CR>", { desc = "Next quickfix entry" })
+map("n", "cp", ":cprev<CR>", { desc = "Prev quickfix entry" })
+
+-- build
+map("n", "<Leader>f6", ":Just build", { desc = "Build" })
+map("n", "<Leader>f7", ":Just editor", { desc = "Build editor" })
 
 local telescope_builtin = require('telescope.builtin')
 map("n", "<C-x>o", telescope_builtin.grep_string, { desc = "Telescope grep string" })
 map("n", "<C-x>i", telescope_builtin.live_grep, { desc = "Telescope live grep" })
 map("n", "<C-x>f", telescope_builtin.find_files, { desc = "Telescope find files" })
+
+-- Just
+vim.api.nvim_create_user_command("Just", function(opts)
+    local args = opts.args ~= "" and opts.args or "build"
+    vim.fn.jobstart("just " .. args, {
+        cwd = vim.fn.getcwd(),
+        stdout_buffered = true,
+        on_stdout = function(_, data)
+            if data then vim.fn.setqflist({}, "a", { lines = data }) end
+        end,
+        on_stderr = function(_, data)
+            if data then vim.fn.setqflist({}, "a", { lines = data }) end
+        end,
+        on_exit = function(_, code)
+            vim.notify("just completed (exit " .. code .. ")")
+            vim.cmd("copen")
+    end,
+  })
+end, { nargs = "*" })
 
