@@ -18,6 +18,7 @@ opt.ignorecase = true
 opt.smartcase = true
 opt.hlsearch = true
 opt.incsearch = true
+opt.grepprg = "rg --vimgrep"
 
 -- Interface
 opt.termguicolors = true
@@ -59,6 +60,7 @@ map("n", "<C-x><space>", ":Exp<CR>", { desc = "Open netrw" })
 -- quickfix
 map("n", "cn", ":cnext<CR>", { desc = "Next quickfix entry" })
 map("n", "cp", ":cprev<CR>", { desc = "Prev quickfix entry" })
+map("n", "<C-x>j", [[:vim /\C<C-R><C-W>/ **/*.cpp **/*.h<CR>]], { desc = "Search current word in the codebase" })
 
 vim.o.errorformat = table.concat({
   "%f:%l:%c: %trror: %m",
