@@ -53,6 +53,7 @@ map("n", "<C-x>e", ":tabe<CR>", { desc = "New tab" })
 map("n", "<C-x>n", "gt<CR>", { desc = "Next tab" })
 map("n", "<C-x>p", "gT<CR>", { desc = "Prev tab" })
 map("n", "<Leader><F4>", ":!genctags.sh<CR>", { desc = "Generate ctags database" })
+map("n", "<C-x>w", ":e ~/.config/nvim/init.lua<CR>", { desc = "Edit nvim init.lua" })
 
 -- netrw
 map("n", "<C-x><space>", ":Exp<CR>", { desc = "Open netrw" })
