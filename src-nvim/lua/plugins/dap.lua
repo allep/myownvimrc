@@ -29,7 +29,7 @@ return {
         program = "/media/workspace/workspace/UnrealEngine/Engine/Binaries/Linux/UnrealEditor-Linux-DebugGame",
         cwd = "${workspaceFolder}",
         stopOnEntry = false,
-        args = {"/media/workspace/workspace/BIM3/Dreamcatcher/Dreamcatcher.uproject"},
+        args = {"${workspaceFolder}/Dreamcatcher.uproject"},
       },
       {
         name = "Attach to process",
