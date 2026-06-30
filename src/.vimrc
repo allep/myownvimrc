@@ -108,7 +108,7 @@ let s:make_output = []
 
 function! AsyncMake(...) abort
     let s:make_output = []
-    let l:cmd = ['make'] + a:000
+    let l:cmd = ['just'] + a:000
 
     call job_start(l:cmd, {
                 \ 'out_cb': 'MakeCollect',
@@ -146,12 +146,8 @@ endfunction
 
 command! -nargs=* MakeAsync call AsyncMake(<f-args>)
 
-nnoremap <Leader><f6> :MakeAsync -f Makefile-AP full-compile<CR>
-nnoremap <Leader><f7> :MakeAsync -f Makefile-AP test<CR>
-nnoremap <Leader><f8> :MakeAsync -f Makefile-AP all<CR>
-nnoremap <c-x><c-x> :MakeAsync -f Makefile-AP run<cr>
-nnoremap <c-x>m :MakeAsync build<cr>
-nnoremap <c-x>r :MakeAsync run<cr>
+nnoremap <Leader><f6> :MakeAsync build<CR>
+nnoremap <Leader><f7> :MakeAsync editor<CR>
 
 " Vimspector - non human mappings
 " From here: https://dev.to/iggredible/debugging-in-vim-with-vimspector-4n0m
@@ -205,10 +201,10 @@ let g:UltiSnipsSnippetDirectories=$HOME.'/.vim/UltiSnips'
 let g:rustfmt_autosave = 1
 
 " COC
-inoremap <expr> <cr> coc#pum#visible() ? coc#pum#confirm() : "\<CR>"
-inoremap <silent> <c-space> coc#refresh()
-inoremap <expr> <Tab> coc#pum#visible() ? coc#pum#next(1) : "\<Tab>"
-inoremap <expr> <S-Tab> coc#pum#visible() ? coc#pum#prev(1) : "\<S-Tab>"
+" inoremap <expr> <cr> coc#pum#visible() ? coc#pum#confirm() : "\<CR>"
+" inoremap <silent> <c-space> coc#refresh()
+" inoremap <expr> <Tab> coc#pum#visible() ? coc#pum#next(1) : "\<Tab>"
+" inoremap <expr> <S-Tab> coc#pum#visible() ? coc#pum#prev(1) : "\<S-Tab>"
 
 " Clang format on save
 function! ClangFormatOnSave()
