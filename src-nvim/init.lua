@@ -55,9 +55,13 @@ map("n", "<C-x><space>", ":Exp<CR>", { desc = "Open netrw" })
 map("n", "cn", ":cnext<CR>", { desc = "Next quickfix entry" })
 map("n", "cp", ":cprev<CR>", { desc = "Prev quickfix entry" })
 
--- build
-map("n", "<Leader>f6", ":Just build", { desc = "Build" })
-map("n", "<Leader>f7", ":Just editor", { desc = "Build editor" })
+vim.o.errorformat = table.concat({
+  "%f:%l:%c: %trror: %m",
+  "%f:%l:%c: %tarning: %m",
+  "%f:%l:%c: %tote: %m",
+  "%f:%l:%c: %m",
+  "%f:%l: %m",
+}, ",")
 
 local telescope_builtin = require('telescope.builtin')
 map("n", "<C-x>o", telescope_builtin.grep_string, { desc = "Telescope grep string" })
@@ -66,20 +70,64 @@ map("n", "<C-x>f", telescope_builtin.find_files, { desc = "Telescope find files"
 
 -- Just
 vim.api.nvim_create_user_command("Just", function(opts)
-    local args = opts.args ~= "" and opts.args or "build"
-    vim.fn.jobstart("just " .. args, {
-        cwd = vim.fn.getcwd(),
-        stdout_buffered = true,
-        on_stdout = function(_, data)
-            if data then vim.fn.setqflist({}, "a", { lines = data }) end
-        end,
-        on_stderr = function(_, data)
-            if data then vim.fn.setqflist({}, "a", { lines = data }) end
-        end,
-        on_exit = function(_, code)
-            vim.notify("just completed (exit " .. code .. ")")
-            vim.cmd("copen")
+  local args = opts.args ~= "" and opts.args or "build"
+  local cur_win = vim.api.nvim_get_current_win()
+
+  -- create or reuse existing just buffer
+  local bufname = "just://output"
+  local buf = vim.fn.bufnr(bufname)
+  if buf == -1 then
+    buf = vim.api.nvim_create_buf(false, true) -- listed=false, scratch=true
+    vim.api.nvim_buf_set_name(buf, bufname)
+    vim.bo[buf].buftype = "nofile"
+    vim.bo[buf].bufhidden = "hide"
+    vim.bo[buf].swapfile = false
+  end
+
+  vim.bo[buf].modifiable = true
+  vim.api.nvim_buf_set_lines(buf, 0, -1, false, {})
+  vim.bo[buf].modifiable = false
+
+  -- opens just buffer in a vertical split if not already present
+  local win = vim.fn.bufwinid(buf)
+  if win == -1 then
+    vim.cmd("vsplit")
+    win = vim.api.nvim_get_current_win()
+    vim.api.nvim_win_set_buf(win, buf)
+    vim.wo[win].number = false
+    vim.wo[win].wrap = false
+  end
+
+  -- re-focus on the previous pane
+  vim.api.nvim_set_current_win(cur_win)
+
+  local function append(data)
+    if not data then return end
+    vim.bo[buf].modifiable = true
+    vim.api.nvim_buf_set_lines(buf, -1, -1, false, data)
+    vim.bo[buf].modifiable = false
+    -- auto-scroll 
+    local w = vim.fn.bufwinid(buf)
+    if w ~= -1 then
+      local n = vim.api.nvim_buf_line_count(buf)
+      vim.api.nvim_win_set_cursor(w, { n, 0 })
+    end
+  end
+
+  local all = {}
+  vim.fn.jobstart("just " .. args, {
+    cwd = vim.fn.getcwd(),
+    on_stdout = function(_, d) append(d); if d then vim.list_extend(all, d) end end,
+    on_stderr = function(_, d) append(d); if d then vim.list_extend(all, d) end end,
+    on_exit = function(_, code)
+      append({ "", "── just completed (exit " .. code .. ") ──" })
+      vim.fn.setqflist({}, " ", { title = "just " .. args, lines = all, efm = vim.o.errorformat })
+      vim.notify("just completed (exit " .. code .. ")")
     end,
   })
 end, { nargs = "*" })
+
+-- build
+map("n", "<Leader><F6>", ":Just build<CR>", { desc = "Build" })
+map("n", "<Leader><F7>", ":Just editor<CR>", { desc = "Build editor" })
 
