@@ -35,6 +35,10 @@ opt.updatetime = 250
 opt.splitright = true
 opt.splitbelow = true
 
+-- Ctags
+opt.tags = opt.tags + {"/media/workspace/workspace/UnrealEngine/tags"}
+
+-- Wildcard ignore
 opt.wildignore:append(".git,*.o,*.so,Intermediate/**,Plugins/**,Binaries/**,Build/**")
 
 -- Mappings
@@ -47,6 +51,7 @@ map("n", "<C-l>", "<C-w>l", { desc = "Dx window" })
 map("n", "<C-x>e", ":tabe<CR>", { desc = "New tab" })
 map("n", "<C-x>n", "gt<CR>", { desc = "Next tab" })
 map("n", "<C-x>p", "gT<CR>", { desc = "Prev tab" })
+map("n", "<Leader><F4>", ":!genctags.sh<CR>", { desc = "Generate ctags database" })
 
 -- netrw
 map("n", "<C-x><space>", ":Exp<CR>", { desc = "Open netrw" })
@@ -166,4 +171,5 @@ local function switch_source_header()
 end
 
 vim.api.nvim_create_user_command('SwitchHeader', switch_source_header, {})
-vim.keymap.set('n', '<C-x>s', switch_source_header, { desc = 'Switch source/header' })
+map('n', '<C-x>s', switch_source_header, { desc = 'Switch source/header' })
+
