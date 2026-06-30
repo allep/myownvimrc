@@ -131,3 +131,39 @@ end, { nargs = "*" })
 map("n", "<Leader><F6>", ":Just build<CR>", { desc = "Build" })
 map("n", "<Leader><F7>", ":Just editor<CR>", { desc = "Build editor" })
 
+-- Switch header / cpp 
+local function switch_source_header()
+  local ext = vim.fn.expand('%:e')
+  local stem = vim.fn.expand('%:t:r')  -- file name without path
+
+  local targets
+  if ext == 'cpp' or ext == 'cc' or ext == 'cxx' then
+    targets = { 'h', 'hpp', 'hxx' }
+  elseif ext == 'h' or ext == 'hpp' or ext == 'hxx' then
+    targets = { 'cpp', 'cc', 'cxx' }
+  else
+    return
+  end
+
+  local root = vim.fs.root(0, { '.git', '.uproject' }) or vim.fn.getcwd()
+
+  local patterns = {}
+  for _, e in ipairs(targets) do
+    table.insert(patterns, stem .. '.' .. e)
+  end
+
+  local matches = vim.fs.find(patterns, { path = root, type = 'file', limit = 10 })
+
+  if #matches == 0 then
+    vim.notify('No corresponding file found', vim.log.levels.WARN)
+  elseif #matches == 1 then
+    vim.cmd('edit ' .. vim.fn.fnameescape(matches[1]))
+  else
+    vim.ui.select(matches, { prompt = 'More occurrences found:' }, function(choice)
+      if choice then vim.cmd('edit ' .. vim.fn.fnameescape(choice)) end
+    end)
+  end
+end
+
+vim.api.nvim_create_user_command('SwitchHeader', switch_source_header, {})
+vim.keymap.set('n', '<C-x>s', switch_source_header, { desc = 'Switch source/header' })
