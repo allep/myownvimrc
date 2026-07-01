@@ -176,3 +176,23 @@ end
 vim.api.nvim_create_user_command('SwitchHeader', switch_source_header, {})
 map('n', '<C-x>s', switch_source_header, { desc = 'Switch source/header' })
 
+-- Clang format on save
+local function clang_format_on_save()
+    local cursor_pos = vim.api.nvim_win_get_cursor(0)
+    vim.cmd("silent! %!clang-format")
+    -- Se clang-format fallisce (es. non trovato, o errore di sintassi),
+    -- vim.v.shell_error sarà diverso da 0: meglio annullare per non svuotare il buffer
+    if vim.v.shell_error ~= 0 then
+        vim.cmd("silent! undo")
+        vim.notify("clang-format fallito", vim.log.levels.ERROR)
+        return
+    end
+    pcall(vim.api.nvim_win_set_cursor, 0, cursor_pos)
+end
+
+vim.api.nvim_create_augroup("ClangFormatOnSave", { clear = true })
+vim.api.nvim_create_autocmd("BufWritePre", {
+    group = "ClangFormatOnSave",
+    pattern = { "*.h", "*.cc", "*.cpp", "*.hpp" },
+    callback = clang_format_on_save,
+})
