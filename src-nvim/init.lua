@@ -55,6 +55,11 @@ map("n", "<C-x>p", "gT<CR>", { desc = "Prev tab" })
 map("n", "<Leader><F4>", ":!genctags.sh<CR>", { desc = "Generate ctags database" })
 map("n", "<C-x>w", ":e ~/.config/nvim/init.lua<CR>", { desc = "Edit nvim init.lua" })
 
+-- DAP
+map("n", "<Leader>de", ":DapTerminate<CR>", { desc = "Terminate DAP session" })
+map("n", "<C-g>p", function() require("dap").up() end, { desc = "Move one frame up"})
+map("n", "<C-g>n", function() require("dap").down() end, { desc = "Move one frame down"})
+
 -- netrw
 map("n", "<C-x><space>", ":Exp<CR>", { desc = "Open netrw" })
 
