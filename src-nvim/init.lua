@@ -2,6 +2,10 @@ require("config.lazy")
 
 local opt = vim.opt
 
+-- path
+opt.path:append '.'
+opt.path:append '**'
+
 -- Line numbers
 opt.number = true
 opt.relativenumber = true
